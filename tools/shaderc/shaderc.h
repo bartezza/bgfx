@@ -44,7 +44,7 @@ namespace bgfx
 #	define SHADERC_CONFIG_HLSL BX_PLATFORM_WINDOWS
 #endif // SHADERC_CONFIG_HLSL
 
-#include <alloca.h>
+//#include <alloca.h>
 #include <stdint.h>
 #include <string.h>
 #include <algorithm>
@@ -110,8 +110,8 @@ namespace bgfx
 #define BGFX_UNIFORM_FRAGMENTBIT UINT8_C(0x10)
 #define BGFX_UNIFORM_SAMPLERBIT  UINT8_C(0x20)
 
-	const char* getUniformTypeName(UniformType::Enum _enum);
-	UniformType::Enum nameToUniformTypeEnum(const char* _name);
+	const char* getUniformTypeNameShaderc(UniformType::Enum _enum);
+	UniformType::Enum nameToUniformTypeEnumShaderc(const char* _name);
 
 	struct Uniform
 	{

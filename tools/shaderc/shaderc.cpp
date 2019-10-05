@@ -146,7 +146,7 @@ namespace bgfx
 		NULL
 	};
 
-	const char* s_uniformTypeName[] =
+	 static const char* s_uniformTypeName[] =
 	{
 		"int",  "int",
 		NULL,   NULL,
@@ -277,7 +277,7 @@ namespace bgfx
 		return _glsl; // centroid, noperspective
 	}
 
-	const char* getUniformTypeName(UniformType::Enum _enum)
+	const char* getUniformTypeNameShaderc(UniformType::Enum _enum)
 	{
 		uint32_t idx = _enum & ~(BGFX_UNIFORM_FRAGMENTBIT|BGFX_UNIFORM_SAMPLERBIT);
 		if (idx < UniformType::Count)
@@ -288,7 +288,7 @@ namespace bgfx
 		return "Unknown uniform type?!";
 	}
 
-	UniformType::Enum nameToUniformTypeEnum(const char* _name)
+	UniformType::Enum nameToUniformTypeEnumShaderc(const char* _name)
 	{
 		for (uint32_t ii = 0; ii < UniformType::Count*2; ++ii)
 		{
@@ -2567,7 +2567,9 @@ namespace bgfx
 
 } // namespace bgfx
 
+#ifndef SHADERC_LIB
 int main(int _argc, const char* _argv[])
 {
 	return bgfx::compileShader(_argc, _argv);
 }
+#endif

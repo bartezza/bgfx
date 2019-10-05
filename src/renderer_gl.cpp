@@ -4981,6 +4981,13 @@ BX_TRACE("%d, %d, %d, %s", _array, _srgb, _mipAutogen, getName(_format) );
 			}
 		}
 
+		// HAX FOR MIPMAPS
+		//GL_CHECK(glBindTexture(m_target, m_id));
+		m_numMips = calcNumMips(true, m_width, m_height);
+		setSamplerState(uint32_t(m_flags), NULL);
+		GL_CHECK(glGenerateMipmap(m_target));
+		//GL_CHECK(glBindTexture(m_target, 0));
+
 		GL_CHECK(glBindTexture(m_target, 0) );
 	}
 
@@ -5174,7 +5181,8 @@ BX_TRACE("%d, %d, %d, %s", _array, _srgb, _mipAutogen, getName(_format) );
 
 			GLenum magFilter;
 			GLenum minFilter;
-			getFilters(flags, 1 < numMips, magFilter, minFilter);
+			//getFilters(flags, 1 < numMips, magFilter, minFilter);
+			getFilters(flags, true, magFilter, minFilter); // HAX
 			GL_CHECK(glTexParameteri(target, GL_TEXTURE_MAG_FILTER, magFilter) );
 			GL_CHECK(glTexParameteri(target, GL_TEXTURE_MIN_FILTER, minFilter) );
 
